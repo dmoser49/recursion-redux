@@ -12,11 +12,7 @@ var getElementsByClassName = function(className, node){
   //returns array-like object
   var returnArray = [];
 
-
   var node = node || document.body;
-
-//
-  var parts = node.className.split(' ');
 
 //Does this node contain the className argument?
   if(node.classList.contains(className)) {
@@ -31,7 +27,7 @@ var getElementsByClassName = function(className, node){
     //recurses through each child node
     var results = getElementsByClassName( className, node.children[i] )
 
-    //
+    //pushes all child results into the returnArray
     returnArray = returnArray.concat(results);
 
   }
