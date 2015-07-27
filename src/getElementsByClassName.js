@@ -7,23 +7,36 @@
 
 //Returns an array-like object of all child elements which have all of the given class names.
 //When called on the document object, the complete document is searched, including the root node.
-var getElementsByClassName = function(className){
+var getElementsByClassName = function(className, node){
 
   //returns array-like object
   var returnArray = [];
 
-  node = node || document.body;
 
-//check if node has className
-  if ( node === className ) {
+  var node = node || document.body;
 
-    //if yes, push into returnArray
-    returnArray.push(node);
+//
+  var parts = node.className.split(' ');
+
+//Does this node contain the className argument?
+  if(node.classList.contains(className)) {
+
+      //if yes, push into returnArray
+      returnArray.push(node);
+    }
+
+  //iterates through each child node
+  for ( var i = 0; i < node.children.length; i++ ) {
+
+    //recurses through each child node
+    var results = getElementsByClassName( className, node.children[i] )
+
+    //
+    returnArray = returnArray.concat(results);
+
   }
 
-
-
-//if not, (don't?)
-
+//return array-like object
+return returnArray;
 
 };
